@@ -33,6 +33,7 @@ public class ItemDivingArmor extends ItemArmor implements ItemModelProvider {
             setRegistryName(unlocalizedName);
             setUnlocalizedName(unlocalizedName);
             this.unlocalizedName = unlocalizedName;
+            setCreativeTab(FathomsMod.CREATIVE_TAB);
         }
 
         @Override

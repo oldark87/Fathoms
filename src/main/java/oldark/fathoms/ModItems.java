@@ -7,6 +7,8 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemArmor;
 import net.minecraftforge.common.util.EnumHelper;
+import oldark.fathoms.item.ItemBase;
+import oldark.fathoms.item.ItemDepthGauge;
 import oldark.fathoms.item.ItemDivingArmor;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -20,17 +22,20 @@ public class ModItems {
 
     public static ItemDivingArmor divingHelmet;
     public static ItemDivingArmor divingFins;
+    public static ItemDepthGauge depthGauge;
 
     public static void init() {
 
         divingHelmet = register(new ItemDivingArmor(divingSuitMaterial, EntityEquipmentSlot.HEAD, "diving_helmet"));
         divingFins = register(new ItemDivingArmor(divingSuitMaterial, EntityEquipmentSlot.FEET, "diving_fins"));
+        depthGauge = register(new ItemDepthGauge("depth_gauge"));
     }
 
     @SideOnly(Side.CLIENT)
     public static void initModels() {
         divingHelmet.initModel();
         divingFins.initModel();
+        depthGauge.initModel();
     }
 
 }
