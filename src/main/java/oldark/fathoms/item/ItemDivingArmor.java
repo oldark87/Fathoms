@@ -74,15 +74,16 @@ public class ItemDivingArmor extends ItemArmor implements ItemModelProvider {
                 //Flippers let you swim fast
                 if (itemStack.getItem() == ModItems.divingFins){
 
+                    boolean flying = player instanceof EntityPlayer && player.capabilities.isFlying;
                     double motionX = player.motionX * SPEED_MULT;
                     double motionY = player.motionY * SPEED_MULT;
                     double motionZ = player.motionZ * SPEED_MULT;
 
-                    if(Math.abs(motionX) < MAX_SPEED)
+                    if(Math.abs(motionX) < MAX_SPEED && !flying)
                         player.motionX = motionX;
-                    if(Math.abs(motionY) < MAX_SPEED)
+                    if(Math.abs(motionY) < MAX_SPEED && !flying)
                         player.motionY = motionY;
-                    if(Math.abs(motionZ) < MAX_SPEED)
+                    if(Math.abs(motionZ) < MAX_SPEED && !flying)
                         player.motionZ = motionZ;
 
                 }

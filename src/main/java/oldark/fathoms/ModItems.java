@@ -17,7 +17,7 @@ import static net.minecraftforge.fml.common.registry.GameRegistry.register;
 
 public class ModItems {
 
-    public static ItemArmor.ArmorMaterial divingSuitMaterial = EnumHelper.addArmorMaterial("DIVINGMATERIAL", "modtut:divingsuittexture", 12,
+    public static ItemArmor.ArmorMaterial divingSuitMaterial = EnumHelper.addArmorMaterial("DIVINGMATERIAL", "fathoms:divingsuittexture", 12,
             new int[]{1, 4, 5, 1}, 9, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0F);
 
     public static ItemDivingArmor divingHelmet;

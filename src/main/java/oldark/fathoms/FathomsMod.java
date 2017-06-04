@@ -9,7 +9,9 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import oldark.fathoms.client.FathomsCreativeTab;
+import oldark.fathoms.commands.TeleportCommand;
 import oldark.fathoms.proxy.CommonProxy;
 
 import org.apache.logging.log4j.Logger;
@@ -47,4 +49,8 @@ public class FathomsMod {
     @SidedProxy(clientSide = "oldark.fathoms.proxy.ClientProxy", serverSide = "oldark.fathoms.proxy.ServerProxy")
     public static CommonProxy proxy;
 
+    @Mod.EventHandler
+    public void serverLoad(FMLServerStartingEvent event) {
+        event.registerServerCommand(new TeleportCommand());
+    }
 }

@@ -27,6 +27,7 @@ public class CommonProxy {
 
         // Initialization of blocks and items typically goes here:
         ModItems.init();
+        ModDimensions.init();
 
     }
 
