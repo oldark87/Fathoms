@@ -38,7 +38,6 @@ public class ItemDepthGauge extends ItemBase {
             Block thisBlock = thisIBlock.getBlock();
             Block currentBlock = thisBlock;
             BlockPos currentBlockPosition = blockPosition;
-            playerIn.sendMessage(new TextComponentString(blockPosition.toString()));
 
             //Convert depth to pressure? 1 cm3 (block) of water is 1.422 psi
             //Basically every 10 blocks down will add 14.6 psi
@@ -51,7 +50,7 @@ public class ItemDepthGauge extends ItemBase {
                 }
             }
             else{
-                depth = 62 - playerPosition.getY();
+                depth = 60 - playerPosition.getY();
                 BlockPos seaLevelBlockPos = new BlockPos(playerPosition.getX(), 62, playerPosition.getZ());
                 Block seaLevelBlock = worldIn.getBlockState(seaLevelBlockPos).getBlock();
                 while (seaLevelBlock.getUnlocalizedName().equals("tile.water")){
