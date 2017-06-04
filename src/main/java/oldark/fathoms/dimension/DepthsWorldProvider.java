@@ -12,12 +12,12 @@ public class DepthsWorldProvider extends WorldProvider {
 
     @Override
     public DimensionType getDimensionType() {
-        return ModDimensions.testDimensionType;
+        return ModDimensions.depthsDimensionType;
     }
 
     @Override
     public String getSaveFolder() {
-        return "TEST";
+        return "DEPTHS";
     }
 
     @Override

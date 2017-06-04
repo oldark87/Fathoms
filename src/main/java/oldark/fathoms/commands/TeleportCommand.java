@@ -60,6 +60,7 @@ public class TeleportCommand extends CommandBase {
         }
 
         if (sender instanceof EntityPlayer) {
+            sender.sendMessage(new TextComponentString("YOLO"));
             DepthsTeleporter.teleportToDimension((EntityPlayer) sender, dim, 0, 100, 0);
         }
     }

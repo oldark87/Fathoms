@@ -10,7 +10,7 @@ import oldark.fathoms.dimension.DepthsWorldProvider;
 
 public class ModDimensions {
 
-    public static DimensionType testDimensionType;
+    public static DimensionType depthsDimensionType;
 
     public static void init() {
         registerDimensionTypes();
@@ -18,11 +18,13 @@ public class ModDimensions {
     }
 
     private static void registerDimensionTypes() {
-        testDimensionType = DimensionType.register(FathomsMod.MOD_ID, "_depths", Config.dimensionId, DepthsWorldProvider.class, false);
+        depthsDimensionType = DimensionType.register(FathomsMod.MOD_ID, "_depths", Config.dimensionId, DepthsWorldProvider.class, true);
     }
 
     private static void registerDimensions() {
-        DimensionManager.registerDimension(Config.dimensionId, testDimensionType);
+        System.out.println("Whatever Text");
+        System.out.println(Config.dimensionId);
+        DimensionManager.registerDimension(Config.dimensionId, depthsDimensionType);
     }
 
 }
