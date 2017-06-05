@@ -24,4 +24,30 @@ public class DepthsWorldProvider extends WorldProvider {
     public IChunkGenerator createChunkGenerator() {
         return new DepthsChunkGenerator(world);
     }
+
+    @Override
+    public boolean  canCoordinateBeSpawn(int x, int z){
+        return false;
+    }
+
+
+    @Override
+    public boolean isSurfaceWorld(){
+        return false;
+    }
+
+    @Override
+    public boolean canRespawnHere(){
+        return false;
+    }
+
+    @Override
+    public String getWelcomeMessage(){
+        return "Welcome to the Depths!";
+    }
+
+    @Override
+    public String getDepartMessage(){
+        return "Returning to the surface.";
+    }
 }

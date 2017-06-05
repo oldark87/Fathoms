@@ -10,6 +10,7 @@ import oldark.fathoms.*;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import oldark.fathoms.world.FathomsBiomeRegistry;
 
 import java.io.File;
 
@@ -27,6 +28,7 @@ public class CommonProxy {
 
         // Initialization of blocks and items typically goes here:
         ModItems.init();
+        FathomsBiomeRegistry.mainRegistry();
         ModDimensions.init();
 
     }

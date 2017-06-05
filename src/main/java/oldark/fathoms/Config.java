@@ -13,7 +13,7 @@ public class Config {
     private static final String CATEGORY_DIMENSIONS = "dimensions";
 
     public static int dimensionId = 100;
-
+    public static int depthsBiomeId = 42;
 
     public static void readConfig() {
         Configuration cfg = CommonProxy.config;

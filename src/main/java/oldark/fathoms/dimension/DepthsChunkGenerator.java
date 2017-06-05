@@ -6,7 +6,9 @@ package oldark.fathoms.dimension;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldEntitySpawner;
@@ -29,6 +31,7 @@ public class DepthsChunkGenerator implements IChunkGenerator {
     private final World worldObj;
     private Random random;
     private Biome[] biomesForGeneration;
+    protected static final IBlockState WATER = Blocks.WATER.getDefaultState();
 
     private MapGenBase caveGenerator = new MapGenCaves();
     private NormalTerrainGenerator terraingen = new NormalTerrainGenerator();
@@ -39,6 +42,7 @@ public class DepthsChunkGenerator implements IChunkGenerator {
         this.random = new Random((seed + 516) * 314);
         terraingen.setup(worldObj, random);
         caveGenerator = TerrainGen.getModdedMapGen(caveGenerator, CAVE);
+        worldObj.setSeaLevel(200);
     }
 
     @Override
@@ -47,6 +51,7 @@ public class DepthsChunkGenerator implements IChunkGenerator {
 
         // Setup biomes for terraingen
         this.biomesForGeneration = this.worldObj.getBiomeProvider().getBiomesForGeneration(this.biomesForGeneration, x * 4 - 2, z * 4 - 2, 10, 10);
+
         terraingen.setBiomesForGeneration(biomesForGeneration);
         terraingen.generate(x, z, chunkprimer);
 

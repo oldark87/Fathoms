@@ -18,12 +18,15 @@ public class ModDimensions {
     }
 
     private static void registerDimensionTypes() {
-        depthsDimensionType = DimensionType.register(FathomsMod.MOD_ID, "_depths", Config.dimensionId, DepthsWorldProvider.class, true);
+        depthsDimensionType = DimensionType.register(FathomsMod.MOD_ID, "_depths", Config.dimensionId, DepthsWorldProvider.class, false);
     }
 
     private static void registerDimensions() {
+
+        //These two lines for testing purposes, show dimension ID for depths in console.
         System.out.println("Whatever Text");
         System.out.println(Config.dimensionId);
+
         DimensionManager.registerDimension(Config.dimensionId, depthsDimensionType);
     }
 

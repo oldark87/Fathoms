@@ -4,6 +4,7 @@ package oldark.fathoms;
  * Created by Oldark on 6/3/2017.
  */
 
+import net.minecraft.world.WorldType;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -14,6 +15,7 @@ import oldark.fathoms.client.FathomsCreativeTab;
 import oldark.fathoms.commands.TeleportCommand;
 import oldark.fathoms.proxy.CommonProxy;
 
+import oldark.fathoms.world.WorldTypeDepths;
 import org.apache.logging.log4j.Logger;
 
 @Mod(modid = FathomsMod.MOD_ID, name = FathomsMod.MOD_NAME, version = FathomsMod.VERSION)
@@ -43,7 +45,7 @@ public class FathomsMod {
 
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
-
+        WorldType DEPTHS = new WorldTypeDepths("depths");
     }
 
     @SidedProxy(clientSide = "oldark.fathoms.proxy.ClientProxy", serverSide = "oldark.fathoms.proxy.ServerProxy")
