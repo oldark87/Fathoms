@@ -12,7 +12,6 @@ public class FathomsBiomeRegistry {
 
     public static void mainRegistry(){
         initalizeBiome();
-        registerBiome();
     }
 
     public static Biome depthsBiome;
@@ -20,10 +19,6 @@ public class FathomsBiomeRegistry {
 
     public static void initalizeBiome(){
         depthsBiome = new BiomeDepths(new Biome.BiomeProperties("Depths").setBaseHeight(-1.8F).setHeightVariation(0.1F));
-        Biome.registerBiome(depthsBiomeId, "Depths", depthsBiome);
-    }
-
-    public static void registerBiome(){
         Biome.registerBiome(depthsBiomeId, "Depths", depthsBiome);
     }
 

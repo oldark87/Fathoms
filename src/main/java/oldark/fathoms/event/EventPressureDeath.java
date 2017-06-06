@@ -1,36 +1,34 @@
-package oldark.fathoms.item;
+package oldark.fathoms.event;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
+import oldark.fathoms.ModItems;
+import oldark.fathoms.item.ItemDivingArmor;
 
 /**
- * Created by Oldark on 6/3/2017.
+ * Created by Oldark on 6/5/2017.
  */
-public class ItemDepthGauge extends ItemBase {
+@Mod.EventBusSubscriber
+public class EventPressureDeath {
 
-    public ItemDepthGauge(String name) {
-        super(name);
-    }
+    @SubscribeEvent
+    public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
 
-    /*
-     * If player is in water below sea level depth is estimated by distance below sea level (sorry people swimming in cavern pools!)
-     *  If player is above sea level, depth is calculated by the number of uninterrupted water blocks directly above their head.
-     */
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn){
+        EntityPlayer playerIn = event.player;
 
         if(playerIn.isInsideOfMaterial(Material.WATER)) {
 
             int depth = 0;
-            double pressure;
-
+            World worldIn = playerIn.world;
             BlockPos blockPosition, playerPosition;
 
             blockPosition = playerPosition = playerIn.getPosition();
@@ -42,35 +40,34 @@ public class ItemDepthGauge extends ItemBase {
 
             //Convert depth to pressure? 1 cm3 (block) of water is 1.422 psi
             //Basically every 10 blocks down will add 14.6 psi
-            if(playerPosition.getY() > 60) {
+            if (playerPosition.getY() > 60) {
                 while (currentBlock.getUnlocalizedName().equals("tile.water")) {
                     depth++;
                     currentBlockPosition = currentBlockPosition.add(0, 1, 0);
                     thisIBlock = worldIn.getBlockState(currentBlockPosition);
                     currentBlock = thisIBlock.getBlock();
                 }
-            }
-            else{
+            } else {
                 depth = 60 - playerPosition.getY();
                 BlockPos seaLevelBlockPos = new BlockPos(playerPosition.getX(), 62, playerPosition.getZ());
                 Block seaLevelBlock = worldIn.getBlockState(seaLevelBlockPos).getBlock();
-                while (seaLevelBlock.getUnlocalizedName().equals("tile.water")){
+                while (seaLevelBlock.getUnlocalizedName().equals("tile.water")) {
                     depth++;
-                    seaLevelBlockPos = seaLevelBlockPos.add(0,1,0);
+                    seaLevelBlockPos = seaLevelBlockPos.add(0, 1, 0);
                     seaLevelBlock = worldIn.getBlockState(seaLevelBlockPos).getBlock();
                 }
             }
 
-            pressure = Math.round(depth * 1.422*100.0)/100.0;
-            playerIn.sendMessage(new TextComponentString("Relative Pressure: " + pressure + "psi."));
+            //Unaided, human beings can withstand 3-4 atm of pressure or 43.5-59 psi. In this case steve has to be  a
+            //bit of a weakling or we'll run out of depth
+            if (depth * 1.422 > 45) {
+                if(!(playerIn.inventory.armorItemInSlot(2) != null && playerIn.inventory.armorItemInSlot(1) != null
+                       && playerIn.inventory.armorItemInSlot(2).getItem() == ModItems.divingSuit
+                       && playerIn.inventory.armorItemInSlot(1).getItem() == ModItems.divingSuitPants)){
+                    playerIn.setHealth(0.0F);
+                }
 
+            }
         }
-
-        else{
-            playerIn.sendMessage(new TextComponentString("Relative Pressure: 0 psi."));
-        }
-
-        return super.onItemRightClick(worldIn, playerIn, handIn);
     }
-
 }

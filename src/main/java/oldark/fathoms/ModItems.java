@@ -22,12 +22,17 @@ public class ModItems {
 
     public static ItemDivingArmor divingHelmet;
     public static ItemDivingArmor divingFins;
+    public static ItemDivingArmor divingSuit;
+    public static ItemDivingArmor divingSuitPants;
     public static ItemDepthGauge depthGauge;
 
     public static void init() {
 
         divingHelmet = register(new ItemDivingArmor(divingSuitMaterial, EntityEquipmentSlot.HEAD, "diving_helmet"));
         divingFins = register(new ItemDivingArmor(divingSuitMaterial, EntityEquipmentSlot.FEET, "diving_fins"));
+        divingSuit = register(new ItemDivingArmor(divingSuitMaterial, EntityEquipmentSlot.CHEST, "diving_suit"));
+        divingSuit = register(new ItemDivingArmor(divingSuitMaterial, EntityEquipmentSlot.LEGS, "diving_suit_pants"));
+
         depthGauge = register(new ItemDepthGauge("depth_gauge"));
     }
 
@@ -35,6 +40,7 @@ public class ModItems {
     public static void initModels() {
         divingHelmet.initModel();
         divingFins.initModel();
+        divingSuit.initModel();
         depthGauge.initModel();
     }
 

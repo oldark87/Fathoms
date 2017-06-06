@@ -13,6 +13,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import oldark.fathoms.client.FathomsCreativeTab;
 import oldark.fathoms.commands.TeleportCommand;
+import oldark.fathoms.event.EventPressureDeath;
 import oldark.fathoms.proxy.CommonProxy;
 
 import oldark.fathoms.world.WorldTypeDepths;
@@ -40,7 +41,6 @@ public class FathomsMod {
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
-
     }
 
     @Mod.EventHandler

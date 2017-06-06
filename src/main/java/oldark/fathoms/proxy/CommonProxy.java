@@ -5,11 +5,13 @@ package oldark.fathoms.proxy;
  */
 import net.minecraft.item.Item;
 import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import oldark.fathoms.*;
 
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import oldark.fathoms.world.DepthsWorldGenerator;
 import oldark.fathoms.world.FathomsBiomeRegistry;
 
 import java.io.File;
@@ -39,6 +41,7 @@ public class CommonProxy {
 
     public void init(FMLInitializationEvent e) {
 //        NetworkRegistry.INSTANCE.registerGuiHandler(ModTut.instance, new GuiProxy());
+        GameRegistry.registerWorldGenerator(new DepthsWorldGenerator(), 0);
     }
 
     public void postInit(FMLPostInitializationEvent e) {
