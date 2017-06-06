@@ -7,6 +7,7 @@ import net.minecraftforge.client.model.obj.OBJLoader;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import oldark.fathoms.FathomsMod;
+import oldark.fathoms.ModBlocks;
 import oldark.fathoms.ModItems;
 
 /**
@@ -20,7 +21,7 @@ public class ClientProxy extends CommonProxy {
         OBJLoader.INSTANCE.addDomain(FathomsMod.MOD_ID);
 
         // Typically initialization of models and such goes here:
-//        ModBlocks.initModels();
+
         ModItems.initModels();
 //        ModEntities.initModels();
     }

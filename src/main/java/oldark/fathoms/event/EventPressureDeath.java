@@ -4,10 +4,12 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
+import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
@@ -16,6 +18,7 @@ import oldark.fathoms.item.ItemDivingArmor;
 
 /**
  * Created by Oldark on 6/5/2017.
+ * Contains events for dieing due to water pressure as well as cause faster drowning.
  */
 @Mod.EventBusSubscriber
 public class EventPressureDeath {
@@ -27,7 +30,8 @@ public class EventPressureDeath {
 
         if(playerIn.isInsideOfMaterial(Material.WATER)) {
 
-            int depth = 0;
+            double pressure;
+            double depth = 0;
             World worldIn = playerIn.world;
             BlockPos blockPosition, playerPosition;
 
@@ -57,16 +61,33 @@ public class EventPressureDeath {
                     seaLevelBlock = worldIn.getBlockState(seaLevelBlockPos).getBlock();
                 }
             }
-
+            pressure = Math.round((depth * 1.422 * 100) * 10) / 10.0;
             //Unaided, human beings can withstand 3-4 atm of pressure or 43.5-59 psi. In this case steve has to be  a
-            //bit of a weakling or we'll run out of depth
-            if (depth * 1.422 > 45) {
+            //bit of a weakling or we'll run out of depth to play with
+            if (pressure > 45) {
                 if(!(playerIn.inventory.armorItemInSlot(2) != null && playerIn.inventory.armorItemInSlot(1) != null
                        && playerIn.inventory.armorItemInSlot(2).getItem() == ModItems.divingSuit
                        && playerIn.inventory.armorItemInSlot(1).getItem() == ModItems.divingSuitPants)){
                     playerIn.setHealth(0.0F);
                 }
 
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public void onLivingUpdate(LivingEvent.LivingUpdateEvent event){
+        if (event.getEntity() instanceof EntityPlayer){
+            if (!event.getEntity().world.isRemote){
+                //such more air out every 5 time increments
+                if (event.getEntity().world.getWorldTime() % 5 == 0){
+                    EntityPlayer player = (EntityPlayer)event.getEntity();
+
+                    //if player still has air, lets suck some out of em
+                    if (player.getAir() > 0){
+                        player.setAir(player.getAir() - 30);
+                    }
+                }
             }
         }
     }

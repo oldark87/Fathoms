@@ -3,6 +3,7 @@ package oldark.fathoms.proxy;
 /**
  * Created by Oldark on 6/3/2017.
  */
+import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -11,6 +12,7 @@ import oldark.fathoms.*;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import oldark.fathoms.ModBlocks;
 import oldark.fathoms.world.DepthsWorldGenerator;
 import oldark.fathoms.world.FathomsBiomeRegistry;
 
@@ -30,12 +32,17 @@ public class CommonProxy {
 
         // Initialization of blocks and items typically goes here:
         ModItems.init();
+        ModBlocks.init();
         FathomsBiomeRegistry.mainRegistry();
         ModDimensions.init();
 
     }
 
     public void registerItemRenderer(Item item, int meta, String id) {
+
+    }
+
+    public void registerBlockRenderer(Block block, int meta, String id) {
 
     }
 

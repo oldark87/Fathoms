@@ -25,6 +25,7 @@ public class ItemBase extends Item implements ItemModelProvider {
 
     @Override
     public void registerItemModel(Item item) {
+
         FathomsMod.proxy.registerItemRenderer(item, 0, name);
     }
 

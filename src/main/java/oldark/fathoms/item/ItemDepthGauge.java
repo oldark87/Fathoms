@@ -28,7 +28,7 @@ public class ItemDepthGauge extends ItemBase {
 
         if(playerIn.isInsideOfMaterial(Material.WATER)) {
 
-            int depth = 0;
+            double depth = 0;
             double pressure;
 
             BlockPos blockPosition, playerPosition;
@@ -61,7 +61,7 @@ public class ItemDepthGauge extends ItemBase {
                 }
             }
 
-            pressure = Math.round(depth * 1.422*100.0)/100.0;
+            pressure = Math.round((depth * 1.422 * 100) * 10) / 10.0;
             playerIn.sendMessage(new TextComponentString("Relative Pressure: " + pressure + "psi."));
 
         }
